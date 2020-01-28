@@ -1,0 +1,38 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container">
+    <div style="text-align:center">
+      <h1>
+        Welcome to {{ title }}!
+      </h1>
+    </div>
+    <div id="accordion">
+  
+      <div class="card" *ngFor="let dt of data | groupBy:'group_name'; index as i">
+        <div class="card-header">
+          <a class="card-link" data-toggle="collapse" href="#collapse{{dt.key}}">
+            {{dt.key}}
+          </a>
+          <input type="checkbox" class="float-right" [(ngModel)]="selectedAll" (change)="selectAll();"/>
+        </div>
+        <div id="collapse{{dt.key}}" [ngClass]="msgCollapseInitial" data-parent="#accordion">
+          <div class="card-body">
+            <ul *ngFor="let dta of dt.value" class="list-unstyled">
+              <li>
+                <div class="row">
+                  <div class="col-sm-11 col-md-11">
+                      {{dta.api_path}}
+                  </div>
+                  <div class="col-sm-1 col-md-1 text-center">
+                      <input type="checkbox" name="{{dt.key}}" [(ngModel)]="dta.is_selected" (change)="checkIfAllSelected();">
+                  </div>
+                </div>  
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  
+  </div>
+  
